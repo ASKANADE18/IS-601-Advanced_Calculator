@@ -1,24 +1,33 @@
+from decimal import Decimal
+from typing import Callable
 from calculator.calculation import Calculation
+from calculator.calculations import Calculations
 from calculator.operations import add, subtract, multiply, divide
 
 class Calculator:
     @staticmethod
-    def add(a, b):
-        calculation = Calculation(a, b, add)
-        return calculation.get_result()
-    
+    def _perform_operation(num1: Decimal, num2: Decimal, operation: Callable[[Decimal, Decimal], Decimal]) -> Decimal:
+        """Helper method to create a Calculation object and execute it."""
+        calculation = Calculation.create(num1, num2, operation)  # Create a calculation object
+        Calculations.add_calculation(calculation)  # Store in history
+        return calculation.perform()  # Execute the operation and return result
+
     @staticmethod
-    def subtract(a, b):
-        calculation = Calculation(a, b, subtract)
-        return calculation.get_result()
-    
+    def add(num1: Decimal, num2: Decimal) -> Decimal:
+        """Performs addition of two Decimal numbers and stores the result in history."""
+        return Calculator._perform_operation(num1, num2, add)
+
     @staticmethod
-    def multiply(a, b):
-        calculation = Calculation(a, b, multiply)
-        return calculation.get_result()
-    
+    def subtract(num1: Decimal, num2: Decimal) -> Decimal:
+        """Performs subtraction of two Decimal numbers and stores the result in history."""
+        return Calculator._perform_operation(num1, num2, subtract)
+
     @staticmethod
-    def divide(a, b):
-        calculation = Calculation(a, b, divide)
-        return calculation.get_result()
-    
+    def multiply(num1: Decimal, num2: Decimal) -> Decimal:
+        """Performs multiplication of two Decimal numbers and stores the result in history."""
+        return Calculator._perform_operation(num1, num2, multiply)
+
+    @staticmethod
+    def divide(num1: Decimal, num2: Decimal) -> Decimal:
+        """Performs division of two Decimal numbers and stores the result in history."""
+        return Calculator._perform_operation(num1, num2, divide)
