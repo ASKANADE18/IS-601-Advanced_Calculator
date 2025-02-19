@@ -1,5 +1,4 @@
 '''My Calculator Test'''
-import pytest
 from calculator import Calculator
 
 def test_addition():
