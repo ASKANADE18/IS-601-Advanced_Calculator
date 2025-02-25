@@ -1,5 +1,7 @@
+import sys
 from decimal import Decimal, InvalidOperation
 from calculator import Calculator
+from app import App
 
 def calculate_and_print(a_string, b_string, operation_string):
     """Function to process inputs and print results, handling exceptions."""
@@ -33,31 +35,8 @@ def calculate_and_print(a_string, b_string, operation_string):
         print(f"Invalid number input: {a_string} or {b_string} is not a valid number.")
 
 def main():
-    """Main entry point for the CLI calculator."""
-    print("Welcome to the CLI Calculator. Type 'exit' to quit.")
-
-    while True:
-        try:
-            a_string = input("Enter first number: ")
-            if a_string.lower() == "exit":
-                print("Exiting calculator...")
-                break
-
-            b_string = input("Enter second number: ")
-            if b_string.lower() == "exit":
-                print("Exiting calculator...")
-                break
-
-            operation_string = input("Enter operation (add, subtract, multiply, divide): ").strip().lower()
-            if operation_string == "exit":
-                print("Exiting calculator...")
-                break
-
-            calculate_and_print(a_string, b_string, operation_string)
-
-        except KeyboardInterrupt:
-            print("\nExiting calculator...")
-            break
-
+    app = App()  # Initialize the App class
+    app.start()  # Start the app REPL loop
+        
 if __name__ == "__main__":
     main()
