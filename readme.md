@@ -1,1 +1,1 @@
-# Project: Advanced Calculator with Command Pattern and Plugins
+# Project: Advanced Calculator with Log and Environment
